@@ -4,7 +4,7 @@ var watermark_url;
 var FE_watermark_url;
 var BE_watermark_url;
 var watermarkImg;
-var onepixel_watermarkUrl = "http://localhost:3036/1x1.png";
+var onepixel_watermarkUrl = "http://localhost:3037/1x1.png";
 var canvasWatermark;
 
 delegated_token = 'to1YSecZMRjrvDGxSfVFTNhG';
@@ -179,16 +179,10 @@ function initializeLiveStream() {
     liveButtom.className="liveActive";
 
      //set watermark for live streaming.
-     if(document.getElementById("watermark-checkbox").checked){
-        //if checked, we want FE to be the icon, and the BE to be a 1x1 pixel 
+
         BE_watermark_url = onepixel_watermarkUrl;
         FE_watermark_url = document.getElementById("watermark-url").value;
-     }else{
-        //if not checked, we want the backend to add the image, and the FE to be a 1x1 pixel
-        BE_watermark_url = document.getElementById("watermark-url").value;
-        FE_watermark_url = onepixel_watermarkUrl;
 
-     }
      console.log("BE image", BE_watermark_url);
      console.log("fe image", FE_watermark_url);
 

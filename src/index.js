@@ -90,18 +90,19 @@ io.on('connection', function(socket){
 		//keyint_min default is 25
 		var keyint_min = Math.min(25, framerate*2);
 			var ops = [
-				'-i', socket._watermarkUrl,
+				
 
 				'-i','-',
 				 //'-c:v', 'libx264', 
-                 '-preset', 'ultrafast', '-tune', 'zerolatency', 
+                 '-preset', 'fast',
+				  '-tune', 'zerolatency', 
 				//'-max_muxing_queue_size', '1000', 
 				//'-bufsize', '5000',
 				//'-r', '1', '-g', '2', '-keyint_min','2', 
-			       '-r', framerate, '-g', framerate*2, '-keyint_min',keyint_min, 
+			       '-r', framerate, '-g', 250, '-keyint_min',keyint_min, 
 				//	'-x264opts',keyint, '-crf', '25', '-pix_fmt', 'yuv420p',
 			    //    '-profile:v', 'baseline', '-level', '3', 
-				'-filter_complex', '[1:v][0:v] overlay=25:25',
+				
      				'-c:a', 'aac', '-b:a','44k', '-ar', 44100, 
 			        '-f', 'flv', socket._rtmpDestination		
 		
