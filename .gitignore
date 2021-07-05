@@ -1,3 +1,7 @@
+#apivideo
+package-lock.json
+.ds_store 
+
 # Logs
 logs
 *.log
