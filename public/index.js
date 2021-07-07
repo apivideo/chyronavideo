@@ -7,7 +7,7 @@ var watermarkImg;
 var onepixel_watermarkUrl = "http://localhost:3037/1x1.png";
 var canvasWatermark;
 
-delegated_token = 'to5zwHPfImr08UM4qa3NKwpN';
+delegated_token = 'tompBU8ZJcUCEsKGxxoBydh';
 //page defaults
 //vod by default, but we can make the page default to live.
 live = false; 
@@ -15,6 +15,26 @@ live = false;
 cameraOnly = false;
 
 window.onload  = function(){
+    //this turns on the camera for a second - just to get permissions to populate the form with mics and cameras
+    navigator.getUserMedia = (navigator.getUserMedia ||
+        navigator.mozGetUserMedia ||
+        navigator.mediaDevices.msGetUserMedia ||
+        navigator.mediaDevices.webkitGetUserMedia);
+
+
+      if( 'permissions' in navigator){
+          //not supported by safari...
+          navigator.getUserMedia({audio:true,video:true}, function(stream) {
+            stream.getTracks().forEach(x=>x.stop());
+            getCamAndMics();
+          }, err=>console.log(err));
+        navigator.permissions.query({name:'camera'}).then(function(permissionStatus) {
+            permissionStatus.onchange = function() {
+            console.log('geolocation permission state has changed to ', this.state);
+            getCamAndMics();
+            };
+        });
+    }
     console.log("loaded");
     // is this a mobile device - no screen share - and 2 cameras?
     //see if screen capture is supported
@@ -136,9 +156,9 @@ window.onload  = function(){
         }
         console.log("captionRecord", captionRecord);
     
+        //get cameras and mics
+        getCamAndMics();
 
-    //get cameras and mics
-    getCamAndMics();
 
     //initialize captioning
     captioning();
